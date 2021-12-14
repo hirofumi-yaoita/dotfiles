@@ -1,0 +1,17 @@
+[color]
+    ui = auto
+[core]
+    editor = vim -c \"set fenc=utf-8\"
+    autocrlf = input
+    excludesfile = ~/.gitignore
+[tig]
+    ignore-space = some
+[tig "color"]
+    cursor = "default black"
+[user]
+    name = yaoita
+    email = h.yaoita@arsaga.jp
+[merge]
+    ff = false
+[pull]
+	ff = only
