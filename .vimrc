@@ -55,16 +55,18 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 "colorscheme jellybeans
-"colorscheme nord
-colorscheme iceberg
+colorscheme nord
+"colorscheme iceberg
 "colorscheme atom-dark
 "colorscheme elly
 
-highlight Normal ctermbg=NONE guibg=NONE
-highlight NonText ctermbg=NONE guibg=NONE
-highlight LineNr ctermbg=NONE guibg=NONE
-highlight Folded ctermbg=NONE guibg=NONE
-highlight EndOfBuffer ctermbg=NONE guibg=NONE
+hi Normal ctermbg=NONE guibg=NONE
+hi NonText ctermbg=NONE ctermfg=245 guibg=NONE guifg=NONE
+hi SpecialKey ctermbg=NONE ctermfg=245 guibg=NONE guifg=NONE
+hi LineNr ctermbg=NONE guibg=NONE
+hi Folded ctermbg=NONE guibg=NONE
+hi EndOfBuffer ctermbg=NONE guibg=NONE
+
 
 "nmap <ESC><ESC> :nohlsearch<CR><ESC>
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
