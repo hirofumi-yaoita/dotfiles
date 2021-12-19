@@ -5,16 +5,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin()
-" colorscheme
-Plug 'nanotech/jellybeans.vim'
-Plug 'gosukiwi/vim-atom-dark'
-Plug 'cocopon/iceberg.vim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'ulwlu/elly.vim'
-
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
-"Plug 'epii1/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'posva/vim-vue'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -27,15 +20,19 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
+Plug 'kristijanhusak/defx-icons'
+Plug 'ryanoasis/vim-devicons'
+
+" colorscheme
+Plug 'nanotech/jellybeans.vim'
+Plug 'gosukiwi/vim-atom-dark'
+Plug 'cocopon/iceberg.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'ulwlu/elly.vim'
+
 " php linter
 "Plug 'w0rp/ale'
 call plug#end()
-
-" NeoBundle 'Shougo/unite.vim'
-" NeoBundle 'Shougo/neomru.vim'
-" NeoBundle 'scrooloose/nerdtree'
-" NeoBundle 'nanotech/jellybeans.vim'
-
 
 syntax on
 set ambiwidth=double
@@ -69,8 +66,8 @@ colorscheme nord
 "colorscheme elly
 
 hi Normal ctermbg=NONE guibg=NONE
-hi NonText ctermbg=NONE ctermfg=245 guibg=NONE guifg=NONE
-hi SpecialKey ctermbg=NONE ctermfg=245 guibg=NONE guifg=NONE
+hi NonText ctermbg=NONE ctermfg=241 guibg=NONE guifg=NONE
+hi SpecialKey ctermbg=NONE ctermfg=241 guibg=NONE guifg=NONE
 hi LineNr ctermbg=NONE guibg=NONE
 hi Folded ctermbg=NONE guibg=NONE
 hi EndOfBuffer ctermbg=NONE guibg=NONE
@@ -78,7 +75,8 @@ hi EndOfBuffer ctermbg=NONE guibg=NONE
 
 "nmap <ESC><ESC> :nohlsearch<CR><ESC>
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
-"nnoremap <silent> ,f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,d :<C-u>Defx<CR>
+nnoremap <silent> ,f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,r :<C-u>Unite file_mru<CR>
 nnoremap <silent> ,b :<C-u>Unite buffer<CR>
 nnoremap <silent> <C-e> :NERDTreeToggle<CR>
@@ -107,7 +105,7 @@ endfunction"}}}
 
 autocmd FileType vue syntax sync fromstart
 
-nnoremap <silent> ,f :<C-u>Defx<CR>
+let g:ctrlp_custom_ignore = '\v(vendor/|node_modules/)'
 
 call defx#custom#option('_', {
   \ 'winwidth': 40,
@@ -115,17 +113,21 @@ call defx#custom#option('_', {
   \ 'direction': 'topleft',
   \ 'show_ignored_files': 1,
   \ 'buffer_name': 'exlorer',
-  \ 'toggle': 1,
+  \ 'toggle': 0,
   \ 'resume': 1,
   \ 'columns': 'indent:icons:filename:mark',
   \ })
+
+autocmd BufWritePost * call defx#redraw()
+autocmd BufEnter * call defx#redraw()
 
 autocmd FileType defx call s:defx_my_settings()
 autocmd FileType defx set nonu
 
 function! s:defx_my_settings() abort
+  " Define mappings
   nnoremap <silent><buffer><expr> <CR>
-   \ defx#do_action('drop')
+  \ defx#do_action('drop')
   nnoremap <silent><buffer><expr> c
   \ defx#do_action('copy')
   nnoremap <silent><buffer><expr> m
@@ -134,15 +136,12 @@ function! s:defx_my_settings() abort
   \ defx#do_action('paste')
   nnoremap <silent><buffer><expr> l
   \ defx#do_action('drop')
-  "\ defx#do_action('open_or_close_tree')
-  nnoremap <silent><buffer><expr> t
-  \ defx#do_action('open','tabnew')
   nnoremap <silent><buffer><expr> E
-  \ defx#do_action('drop', 'vsplit')
+  \ defx#do_action('open', 'vsplit')
   nnoremap <silent><buffer><expr> P
-  \ defx#do_action('drop', 'pedit')
+  \ defx#do_action('preview')
   nnoremap <silent><buffer><expr> o
-  \ defx#do_action('open_or_close_tree')
+  \ defx#do_action('open_tree', 'toggle')
   nnoremap <silent><buffer><expr> K
   \ defx#do_action('new_directory')
   nnoremap <silent><buffer><expr> N
