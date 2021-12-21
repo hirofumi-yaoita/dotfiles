@@ -10,8 +10,16 @@ Plug 'Shougo/neomru.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'posva/vim-vue'
 
+" colorscheme
+Plug 'nanotech/jellybeans.vim'
+Plug 'gosukiwi/vim-atom-dark'
+Plug 'cocopon/iceberg.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'ulwlu/elly.vim'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" defx
 if has('nvim')
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -20,15 +28,9 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
+" defx icon
 Plug 'kristijanhusak/defx-icons'
 Plug 'ryanoasis/vim-devicons'
-
-" colorscheme
-Plug 'nanotech/jellybeans.vim'
-Plug 'gosukiwi/vim-atom-dark'
-Plug 'cocopon/iceberg.vim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'ulwlu/elly.vim'
 
 " php linter
 "Plug 'w0rp/ale'
@@ -103,9 +105,10 @@ function! s:unite_my_settings()"{{{
   imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
 endfunction"}}}
 
-autocmd FileType vue syntax sync fromstart
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_custom_ignore = 'vendor\|node_modules\|DS_Store\|git\|.swp'
 
-let g:ctrlp_custom_ignore = '\v(vendor/|node_modules/)'
+autocmd FileType vue syntax sync fromstart
 
 call defx#custom#option('_', {
   \ 'winwidth': 40,
